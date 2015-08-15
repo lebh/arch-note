@@ -137,7 +137,8 @@ sudo pacman -S mate mate-extra
 #XFCE
 sudo pacman -S xfce4 xfce4-goodies xarchiver mupdf
 
-
+#i3
+sudo pacman -S i3 dmenu
 
 	  
 sudo nano ~/.xinitrc
@@ -148,6 +149,7 @@ sudo nano ~/.xinitrc
 #exec startlxqt
 #exec mate-session
 #exec startxfce4
+#exec i3
 startx
 
 #-------------------------------------------------------------------------------
@@ -181,6 +183,7 @@ sudo pacman -S gimp gthumb
 sudo pacman -S banshee easytag vlc
 sudo pacman -S ttf-dejavu ttf-liberation 
 sudo pacmna -S firefox
+sudo pacman -S screenfetch
 
 yaourt ttf-ms-fonts 
 yaourt ttf-vista-fonts
