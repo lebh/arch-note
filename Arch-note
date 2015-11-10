@@ -166,7 +166,7 @@ sudo pacman -S zip unzip unrar p7zip
 sudo pacman -S alsa-utils alsa-plugins
 sudo pacman -S pavucontrol 
 sudo pacman -S ntfs-3g exfat-utils fuse-exfat autofs
-sudo pacman -S zramswap
+yaourt zramswap
 systemctl enable zramswap
 sudo pacman -S tlp
 systemctl enable tlp
@@ -184,26 +184,22 @@ sudo pacman -S banshee easytag vlc
 sudo pacman -S ttf-dejavu ttf-liberation 
 sudo pacmna -S firefox
 sudo pacman -S screenfetch
+sudo pacman -S skype teamspeak3 dropbox ufw-extras numix-themes libreoffice-fresh steam
 
+
+yaourt google-earth
 yaourt ttf-ms-fonts 
 yaourt ttf-vista-fonts
-yaourt teamspeak3
-yaourt skype
-yaourt google-earth
-yaourt dropbox
 yaourt moka-icon-theme-git
 yaourt nitrux-icon-theme
-yaourt numix-icon-theme-git numix-circle-icon-theme-git
 yaourt evopop 
 yaourt numix-themes
 yaourt zuki-themes-git
 yaourt google-chrome
-yaourt libreoffice
 yaourt compiz
 yaourt compiz-manager
 yaourt conky-lua
 yaourt notepadqq
-yaourt steam
 
 pacman -Rsc
 pacman -Qqdt
