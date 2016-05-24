@@ -1,4 +1,9 @@
 
+
+#-------------------------------------------------------------------------------
+#install notes
+#-------------------------------------------------------------------------------
+
 loadkeys no-latin1
 
 wifi-menu
@@ -73,6 +78,28 @@ syslinux-install_update -iam
 exit
 reboot
 
+
+#-------------------------------------------------------------------------------
+#syslinux notes
+#-------------------------------------------------------------------------------
+
+
+
+convert -depth 16 -colors 65536 my_custom_image.png splash.png
+
+convert -resize 640×480 -depth 16 -colors 65536 my_custom_image.png splash.png
+
+sudo mv splash.png /boot/syslinux/
+
+UI vesamenu.c32 (I have already uncommented in a previous occasion)
+MENU BACKGROUND splash.png
+
+#--------------------------------------------------------------------------------
+
+
+
+
+
 #-------------------------------------------------------------------------------
 #post-installation
 #-------------------------------------------------------------------------------
@@ -105,7 +132,7 @@ xdg-user-dirs-update
 
 
 #-------------------------------------------------------------------------------
-#desktop
+#desktop note; pick
 #-------------------------------------------------------------------------------
 
 #cinnamon
@@ -152,27 +179,51 @@ sudo nano ~/.xinitrc
 #exec i3
 startx
 
+
+#-------------------------------------------------------------------------------
+#lightdm notes
+#-------------------------------------------------------------------------------
+
+
+sudo pacman -S lightdm
+sudo pacman -S lightdm-gtk-greeter
+sudo pacman -S lightdm-gtk-greeter-settings
+sudo systemctl enable lightdm
+
+background cuzt. to be put in: /usr/share/backgrounds
+
+
+
+#-------------------------------------------------------------------------------
+#GDM notes; not recommended since customize is difficult; use lightdm
+#-------------------------------------------------------------------------------
+
+
+sudo pacman -S gdm
+sudo systemctl enable gdm
+
+
 #-------------------------------------------------------------------------------
 #post-install
 #-------------------------------------------------------------------------------
 
-
+#Netowrk
 pacman --noconfirm -S networkmanager dnsmasq network-manager-applet networkmanager-openconnect networkmanager-openvpn networkmanager-pptp networkmanager-vpnc ntp networkmanager-dispatcher-ntpd
 
 systemctl enable NetworkManager && systemctl start NetworkManager
 sudo ntpd -u ntp:ntp
 
-pacman --noconfirm -S  bc rsync mlocate bash-completion pkgstats zip unzip unrar p7zip alsa-utils alsa-plugins pavucontrol ntfs-3g exfat-utils fuse-exfat autofs a52dec faac faad2 flac jasper lame libdca libdv libmad libmpeg2 libtheora libvorbis libxv wavpack x264 xvidcore gstreamer0.10-plugins gcc patch curl zlib readline libxml2 libxslt bison autoconf automake diffutils make libtool dbus ttf-dejavu sudo yaourt wget openssh tar gzip unzip unrar
+#FS + lib + codec + compressed file + audio
+pacman --noconfirm -S  bc rsync mlocate bash-completion pkgstats  ntfs-3g exfat-utils fuse-exfat autofs a52dec faac faad2 flac jasper lame libdca libdv libmad libmpeg2 libtheora libvorbis libxv wavpack x264 xvidcore gstreamer0.10-plugins gcc patch curl zlib readline libxml2 libxslt bison autoconf automake diffutils make libtool dbus sudo wget openssh tar gzip unzip unrar zip unzip unrar p7zip alsa-utils alsa-plugins pavucontrol
 
-pacman --noconfirm -S  alsa-utils alsa-plugins pavucontrol ntfs-3g exfat-utils fuse-exfat autofs terminator synapse shutter galculator cool-retro-term htop ufw gufw clamav ttf-dejavu ttf-liberation
+#applications
+pacman --noconfirm -S terminator synapse shutter galculator cool-retro-term htop ufw gufw clamav clamtk banshee easytag vlc gimp gthumb gedit gedit-plugins mplayer smplayer firefox screenfetch skype teamspeak3 dropbox ufw-extras libreoffice-fresh steam evince flashplugin zathura zathura-pdf-poppler git vim xscreensaver os-prober pinta yaourt
 
-pacman --noconfirm -S  wine icoutils wine_gecko wine-mono winetricks playonlinux banshee easytag vlc gimp gthumb gedit gedit-plugins mplayer smplayer firefox screenfetch skype teamspeak3 dropbox ufw-extras numix-themes libreoffice-fresh steam evince flashplugin zathura zathura-pdf-poppler git vim xscreensaver os-prober pinta
+#wine + themes 
+pacman --noconfirm -S  wine icoutils wine_gecko wine-mono winetricks playonlinux numix-themes ttf-dejavu ttf-liberation ttf-dejavu
 
 
-
-sudo pacman -S  (firewalld # firewalld or ufw/gufw)
-systemctl enable firewalld # just enable one
-systemctl enable ufw
+sudo systemctl enable ufw && sudo systemctl start ufw
 
 
 
@@ -220,18 +271,14 @@ sudo easy_install3
 sudo pip install feedparser
 
 
-pacman -Rsc
-pacman -Qqdt
-pacman -Sc
 
-# after reboot
-
-systemctl stop netctl-auto@wlp13s0.service
-systemctl disable netctl-auto@wlp13s0.service
-systemctl disable netctl
+#-------------------------------------------------------------------------------
+#post set-up notes
+#-------------------------------------------------------------------------------
 
 
-# nvidia
+
+# nvidia - notes
 sudo pacman -S nvidia
 
 #laptop:
@@ -246,22 +293,90 @@ tlp start
 yaourt --noconfirm -S preload
 sudo systemctl enable preload.service && sudo systemctl start preload.service
 
+
+
+# after reboot for wifi -> networkmanger
+systemctl stop netctl-auto@wlp13s0.service
+systemctl disable netctl-auto@wlp13s0.service
+systemctl disable netctl
+
 #autostart--
 kalu, xscreensaver, variety, caffeine(--prefrence add flash,vlc,mplayer,), redshift
 
 
+#command for finding pack for whne command not found
+sudo pacman -S pkgfile
+sudo pkgfile -u
+sudo pkgfile makepkg
+sudo pkgfile -l archlinux-keyring
+# add to bashrc: source /usr/share/doc/pkgfile/command-not-found.bash
+#reopen terminal
+#test command: abiword = abiword may be found in the following packeges:..
 
-#-------------------------------------------------------------------------------
-#syslinux
-#------------------------------------------------------------------------------
+
+
+# follow steps on: samba @archwiki
+fusemount -u "/path/to/dir" #to unmount
+smbnetfs "/path/to/dir"     #to mount; recomended "/home/user/Network Folder"
 
 
 
-convert -depth 16 -colors 65536 my_custom_image.png splash.png
+#swappiness on SSD
+cat /proc/sys/vm/swappiness # to check
+sudo touch /etc/sysctl.d/60-my-swappiness.conf
+ecoh 'vm.swappiness = 1' > 60-my-swappiness.conf 
+sysctl --system 
 
-convert -resize 640×480 -depth 16 -colors 65536 my_custom_image.png splash.png
 
-sudo mv splash.png /boot/syslinux/
 
-UI vesamenu.c32 (I have already uncommented in a previous occasion)
-MENU BACKGROUND splash.png
+#ssd exp. of fstab with adding "discard":
+#
+# /etc/fstab: static file system information
+#
+# <file system> <dir>   <type>  <options>       <dump>  <pass>
+# /dev/sdb5
+UUID=27f99a0d-3437-4b81-b512-023e05b0bc91       /               ext4            rw,relatime,data=ordered,discard     $
+
+# /dev/sdb7
+UUID=ed2c3de4-9595-4c87-856d-84fa1bd06157       /home           ext4            rw,relatime,data=ordered,discard     $
+
+# /dev/sdb6
+UUID=b37b8d7b-7cfc-4615-8a05-676eb467a9ab       none            swap            defaults        0 0
+
+# /dev/sda1 LABEL=ssd1
+UUID=8f4c4ace-2c40-4ad4-bb6e-701bcb2a8f23       /run/media/leif/ssd1   ext4     rw,relatime,data=ordered,discard     $
+
+# /dev/sdc1 LABEL=Disk1
+UUID=967a164e-1121-445d-8d1b-9e07d28ef4dd       /run/media/leif/Disk1  ext4     rw,relatime,data=ordered        0 4
+
+# /dev/sdd1 LABEL=Disk2
+UUID=7580a43f-bedb-4872-8d9b-31c5b6fdd112       /run/media/leif/Disk2  ext4     rw,relatime,data=ordered        0 5
+
+
+
+#systemctl check
+systemctl --fail #if fails check
+sudo systemctl status XXXX.service
+journalctl -b 0 _PID=XXXX   # if fail comes up with PID
+#if systemd-modules-load.service fail usaly need to install "virtualbox-host-modules-arch"
+
+
+
+#note
+pacman -Rsc
+pacman -Qqdt
+pacman -Sc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
