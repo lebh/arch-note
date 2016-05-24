@@ -277,34 +277,47 @@ sudo pip install feedparser
 #-------------------------------------------------------------------------------
 
 
-
+#---------------------
 # nvidia - notes
+#--------------------
 sudo pacman -S nvidia
 
-#laptop:
-yaourt broadcom-wl
+
+#-------------
+#laptop note
+#-------------
+yaourt broadcom-wl #lenove
 sudo pacman -S tlp
 systemctl enable tlp
 systemctl enable tlp-sleep
 systemctl mask systemd-rfkill
 tlp start
 
-#desktop
+#-------------
+#desktop note
+#------------
 yaourt --noconfirm -S preload
 sudo systemctl enable preload.service && sudo systemctl start preload.service
 
 
 
-# after reboot for wifi -> networkmanger
+#--------------------------------------------
+# after reboot for wifi -> networkmanger note
+#--------------------------------------------
 systemctl stop netctl-auto@wlp13s0.service
 systemctl disable netctl-auto@wlp13s0.service
 systemctl disable netctl
 
+#-----------
 #autostart--
+#-----------
 kalu, xscreensaver, variety, caffeine(--prefrence add flash,vlc,mplayer,), redshift
 
 
-#command for finding pack for whne command not found
+
+#------------------------
+#command not found; results in finding possible packege
+#------------------------
 sudo pacman -S pkgfile
 sudo pkgfile -u
 sudo pkgfile makepkg
@@ -314,22 +327,27 @@ sudo pkgfile -l archlinux-keyring
 #test command: abiword = abiword may be found in the following packeges:..
 
 
-
-# follow steps on: samba @archwiki
+#-------
+#samba
+#-------
+# follow steps on: samba @ https://wiki.archlinux.org/index.php/samba
 fusemount -u "/path/to/dir" #to unmount
 smbnetfs "/path/to/dir"     #to mount; recomended "/home/user/Network Folder"
 
 
-
+#------------------
 #swappiness on SSD
+#------------------
 cat /proc/sys/vm/swappiness # to check
 sudo touch /etc/sysctl.d/60-my-swappiness.conf
 ecoh 'vm.swappiness = 1' > 60-my-swappiness.conf 
 sysctl --system 
 
 
+#--------------------------------------------
+#SSD example of /etc/fstab , with adding "discard" for SSD:
+#---------------------------------------------
 
-#ssd exp. of fstab with adding "discard":
 #
 # /etc/fstab: static file system information
 #
@@ -353,16 +371,18 @@ UUID=967a164e-1121-445d-8d1b-9e07d28ef4dd       /run/media/leif/Disk1  ext4     
 UUID=7580a43f-bedb-4872-8d9b-31c5b6fdd112       /run/media/leif/Disk2  ext4     rw,relatime,data=ordered        0 5
 
 
-
+#-----------------
 #systemctl check
+#-----------------
 systemctl --fail #if fails check
 sudo systemctl status XXXX.service
-journalctl -b 0 _PID=XXXX   # if fail comes up with PID
+journalctl -b 0 _PID=XXXX   # if fail comes up with PID the use this command
 #if systemd-modules-load.service fail usaly need to install "virtualbox-host-modules-arch"
 
 
-
-#note
+#-----
+#notes
+#----
 pacman -Rsc
 pacman -Qqdt
 pacman -Sc
