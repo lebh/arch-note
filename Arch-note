@@ -191,7 +191,7 @@ sudo pacman -S lightdm-gtk-greeter-settings
 sudo systemctl enable lightdm
 
 background cuzt. to be put in: /usr/share/backgrounds
-
+pacman:font-mathematica  font:mathematica6 bold   size 24
 
 
 #-------------------------------------------------------------------------------
