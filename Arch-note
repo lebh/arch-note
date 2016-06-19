@@ -341,31 +341,35 @@ ecoh 'vm.swappiness = 1' > 60-my-swappiness.conf
 sysctl --system 
 
 
-#--------------------------------------------
-#SSD example of /etc/fstab , with adding "discard" for SSD:
-#---------------------------------------------
+#-----------------------------------------------------------------------------------------------------------------------#
+#SSD example of /etc/fstab , with adding "discard" for SSD:								#
+#-----------------------------------------------------------------------------------------------------------------------#
+															#
+#															#
+# /etc/fstab: static file system information										#
+#															#
+# <file system> <dir>   <type>  <options>       <dump>  <pass>								#
+# /dev/sdb5														#
+UUID=27f99a0d-3437-4b81-b512-023e05b0bc91       /               ext4            rw,relatime,data=ordered,discard     $	#
+															#
+# /dev/sdb7														#
+UUID=ed2c3de4-9595-4c87-856d-84fa1bd06157       /home           ext4            rw,relatime,data=ordered,discard     $	#
+															#
+# /dev/sdb6														#
+UUID=b37b8d7b-7cfc-4615-8a05-676eb467a9ab       none            swap            defaults        0 0			#
+															#
+# /dev/sda1 LABEL=ssd1													#
+UUID=8f4c4ace-2c40-4ad4-bb6e-701bcb2a8f23       /run/media/leif/ssd1   ext4     rw,relatime,data=ordered,discard     $	#
+															#
+# /dev/sdc1 LABEL=Disk1													#
+UUID=967a164e-1121-445d-8d1b-9e07d28ef4dd       /run/media/leif/Disk1  ext4     rw,relatime,data=ordered        0 4	#
+															#
+# /dev/sdd1 LABEL=Disk2													#
+UUID=7580a43f-bedb-4872-8d9b-31c5b6fdd112       /run/media/leif/Disk2  ext4     rw,relatime,data=ordered        0 5	#
+															#
+#-----------------------------------------------------------------------------------------------------------------------#
 
-#
-# /etc/fstab: static file system information
-#
-# <file system> <dir>   <type>  <options>       <dump>  <pass>
-# /dev/sdb5
-UUID=27f99a0d-3437-4b81-b512-023e05b0bc91       /               ext4            rw,relatime,data=ordered,discard     $
 
-# /dev/sdb7
-UUID=ed2c3de4-9595-4c87-856d-84fa1bd06157       /home           ext4            rw,relatime,data=ordered,discard     $
-
-# /dev/sdb6
-UUID=b37b8d7b-7cfc-4615-8a05-676eb467a9ab       none            swap            defaults        0 0
-
-# /dev/sda1 LABEL=ssd1
-UUID=8f4c4ace-2c40-4ad4-bb6e-701bcb2a8f23       /run/media/leif/ssd1   ext4     rw,relatime,data=ordered,discard     $
-
-# /dev/sdc1 LABEL=Disk1
-UUID=967a164e-1121-445d-8d1b-9e07d28ef4dd       /run/media/leif/Disk1  ext4     rw,relatime,data=ordered        0 4
-
-# /dev/sdd1 LABEL=Disk2
-UUID=7580a43f-bedb-4872-8d9b-31c5b6fdd112       /run/media/leif/Disk2  ext4     rw,relatime,data=ordered        0 5
 
 
 #-----------------
