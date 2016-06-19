@@ -4,58 +4,63 @@
 #install notes
 #-------------------------------------------------------------------------------
 
-loadkeys no-latin1
 
-wifi-menu
+loadkeys no-latin1			#Will change keyboard layout to norwegian
 
-ping www.google.com
+wifi-menu				#Connects up to wifi
 
-cfdisk /dev/sda
+ping www.google.com			#Checking if internett connection is estabilated 
 
-lsblk /dev/sda #when done to check 
+cfdisk /dev/sda				#Configing the partion
 
-mkfs.ext4 /dev/sdaX #use that on all of them
+lsblk /dev/sda 				#When done to check how the partions are 
 
-mkswap /dev/sda2
-swapon /dev/sda2
+mkfs.ext4 /dev/sda# 			#Use that on all of the partion
 
-lsblk /dev/sda #when done to check 
+mkswap /dev/sda2			#Making the partion in to a swap
+swapon /dev/sda2			#Turning on swap
 
-mount /dev/sda1 /mnt
-mkdir -p /mnt/home
-mount /dev/sda3 /mnt/home
 
-lsblk /dev/sda #when done to check 
+mount /dev/sda1 /mnt			#Mounting the root partion
+mkdir -p /mnt/home			#Making the home folder for the partion
+mount /dev/sda3 /mnt/home		#Mounting the home partion
 
-nano /etc/pacman.d/mirrorlist # dont realy needed
+lsblk /dev/sda 				#When done to check 
 
-pacstrap -i /mnt base base-devel
+nano /etc/pacman.d/mirrorlist 		#is not really needed
 
-genfstab -U -p /mnt >> /mnt/etc/fstab
-cat /mnt/etc/fstab
+pacstrap -i /mnt base base-devel	#Installing the base packages
 
-arch-chroot /mnt /bin/bash
+genfstab -U -p /mnt >> /mnt/etc/fstab	#Generates fstab file
+cat /mnt/etc/fstab			#To check that fstab file was correctly generated
 
-nano /etc/locale.gen
+arch-chroot /mnt /bin/bash		#Change root
+
+nano /etc/locale.gen			#defining what language, etc.. the system is going to use
 locale-gen
 export LANG=en_US.UTF-8
 
-echo "KEYMAP=no-latin1" >> /etc/vconsole.conf 
+nano /etc/vconsole.conf >> "KEYMAP=no-latin1" #To make norwgian keyboard layout defult 
 cat /etc/vconsole.conf
 
+tzselect				#Time zone selection etc..
 ln -sf /usr/share/zoneinfo/Europe/Oslo /etc/localtime
 hwclock --systohc --utc
 
-echo archpc > /etc/hostname
-nano /etc/hosts                # adds to both sides
+echo archpc > /etc/hostname		#Creating hostname
+nano /etc/hosts               		#Add to both sides at the right bottom
 
-pacman -S dialog iw wpa_supplicant wpa_actiond
+pacman -S dialog iw wpa_supplicant wpa_actiond  #Installing and setingup wifi
 wifi-menu
 ip link
 systemctl enable netctl-auto@XXXXX.service   # x is usaly wlp something
 
-passwd
+passwd					#Making root password
 
+
+
+
+#syslinux install
 pacman -S syslinux gptfdisk efibootmgr dosfstools mtools util-linux
 sudo pacman -S memtest86+ wget
 syslinux-install_update -iam
@@ -63,38 +68,41 @@ cd /boot/syslinux
 wget https://projects.archlinux.org/archiso.git/plain/configs/releng/syslinux/splash.png
 nano /boot/syslinux/syslinux.cfg
 
-#-----------------------------------------------
- MENU VSHIFT 10
-
- LABEL memtest
-         MENU LABEL Memtest86+
-         LINUX ../memtest86+/memtest.bin
-		 
-#---------------------------------------------------
+#-----------------------------------------------#
+ MENU VSHIFT 10					#
+						#
+ LABEL memtest					#
+         MENU LABEL Memtest86+			#
+         LINUX ../memtest86+/memtest.bin	#
+		 				#
+#-----------------------------------------------#
 cp -a /boot /boot.bak
 cp -a /boot.bak/* /boot
 syslinux-install_update -iam
+
+
+mkinitcpio -p linux
 
 exit
 reboot
 
 
-#-------------------------------------------------------------------------------
-#syslinux notes
-#-------------------------------------------------------------------------------
-
-
-
-convert -depth 16 -colors 65536 my_custom_image.png splash.png
-
-convert -resize 640×480 -depth 16 -colors 65536 my_custom_image.png splash.png
-
-sudo mv splash.png /boot/syslinux/
-
-UI vesamenu.c32 (I have already uncommented in a previous occasion)
-MENU BACKGROUND splash.png
-
-#--------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------#
+#syslinux notes									#
+#-------------------------------------------------------------------------------#
+										#
+										#
+										#
+convert -depth 16 -colors 65536 my_custom_image.png splash.png			#
+										#
+convert -resize 640×480 -depth 16 -colors 65536 my_custom_image.png splash.png	#
+										#
+sudo mv splash.png /boot/syslinux/						#
+										#
+UI vesamenu.c32 (I have already uncommented in a previous occasion)		#
+MENU BACKGROUND splash.png							#
+										#
+#-------------------------------------------------------------------------------#
 
 
 
@@ -104,20 +112,20 @@ MENU BACKGROUND splash.png
 #post-installation
 #-------------------------------------------------------------------------------
 
-useradd -m -G wheel -s /bin/bash leif
+useradd -m -G wheel -s /bin/bash #user#		#Create user
 passwd leif
 
-nano /etc/sudoers   # add it under root
+nano /etc/sudoers   				#under root copy line and username insted of root
 
-exit
-#log in as user
+exit						#log in as user
 
 sudo nano /etc/pacman.conf 
 # add [archlinuxfr] 
 #SigLevel = Never 
 #Server = http://repo.archlinux.fr/$arch
 
-# also enable multilab
+#Also enable multilab
+
 
 sudo pacman -Suy
 
@@ -232,18 +240,7 @@ yaourt --noconfirm -S ttf-ms-fonts
 yaourt --noconfirm -S ttf-vista-fonts
 yaourt --noconfirm -S moka-icon-theme-git
 yaourt --noconfirm -S nitrux-icon-theme
-yaourt --noconfirm -S numix-themes-green
-yaourt --noconfirm -S numix-themes-darkblue
-yaourt --noconfirm -S numix-themes-electric
-yaourt --noconfirm -S numix-icon-theme-square
-yaourt --noconfirm -S numix-themes-archblue-git
-yaourt --noconfirm -S numix-shine-icon-theme-git
-yaourt --noconfirm -S numix-circle-icon-theme-git
-yaourt --noconfirm -S numix-bevel-icon-theme-git
-yaourt --noconfirm -S numix-frost-themes
-yaourt --noconfirm -S numix-folders-git
 yaourt --noconfirm -S numix-themes
-yaourt --noconfirm -S numix-icon-theme-square
 yaourt --noconfirm -S zuki-themes-git
 yaourt --noconfirm -S evopop-icon-theme
 yaourt --noconfirm -S evopop-gtk-theme
@@ -386,17 +383,5 @@ journalctl -b 0 _PID=XXXX   # if fail comes up with PID the use this command
 pacman -Rsc
 pacman -Qqdt
 pacman -Sc
-
-
-
-
-
-
-
-
-
-
-
-
 
 
