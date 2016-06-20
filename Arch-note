@@ -224,19 +224,19 @@ sudo systemctl enable gdm
 #-------------------------------------------------------------------------------#
 
 #Netowrk
-pacman --noconfirm -S networkmanager dnsmasq network-manager-applet networkmanager-openconnect networkmanager-openvpn networkmanager-pptp networkmanager-vpnc ntp networkmanager-dispatcher-ntpd
+sudo pacman --noconfirm -S networkmanager dnsmasq network-manager-applet networkmanager-openconnect networkmanager-openvpn networkmanager-pptp networkmanager-vpnc ntp networkmanager-dispatcher-ntpd
 
-systemctl enable NetworkManager && systemctl start NetworkManager
+sudo systemctl enable NetworkManager && sudo systemctl start NetworkManager
 sudo ntpd -u ntp:ntp
 
 #FS + lib + codec + compressed file + audio
-pacman --noconfirm -S  bc rsync mlocate bash-completion pkgstats  ntfs-3g exfat-utils fuse-exfat autofs a52dec faac faad2 flac jasper lame libdca libdv libmad libmpeg2 libtheora libvorbis libxv wavpack x264 xvidcore gstreamer0.10-plugins gcc patch curl zlib readline libxml2 libxslt bison autoconf automake diffutils make libtool dbus sudo wget openssh tar gzip unzip unrar zip unzip unrar p7zip alsa-utils alsa-plugins pavucontrol
+sudo pacman --noconfirm -S  bc rsync mlocate bash-completion pkgstats  ntfs-3g exfat-utils fuse-exfat autofs a52dec faac faad2 flac jasper lame libdca libdv libmad libmpeg2 libtheora libvorbis libxv wavpack x264 xvidcore gstreamer0.10-plugins gcc patch curl zlib readline libxml2 libxslt bison autoconf automake diffutils make libtool dbus sudo wget openssh tar gzip unzip unrar zip unzip unrar p7zip alsa-utils alsa-plugins pavucontrol
 
 #applications
-pacman --noconfirm -S terminator synapse shutter galculator cool-retro-term htop ufw gufw clamav clamtk banshee easytag vlc gimp gthumb gedit gedit-plugins mplayer smplayer firefox screenfetch skype teamspeak3 dropbox ufw-extras libreoffice-fresh steam evince flashplugin zathura zathura-pdf-poppler git vim xscreensaver os-prober pinta yaourt
+sudo pacman --noconfirm -S terminator synapse shutter galculator cool-retro-term htop ufw gufw clamav banshee easytag vlc gimp gthumb gedit gedit-plugins mplayer smplayer firefox screenfetch skype teamspeak3 dropbox ufw-extras libreoffice-fresh steam evince flashplugin zathura zathura-pdf-poppler git vim xscreensaver os-prober pinta yaourt
 
 #wine + themes 
-pacman --noconfirm -S  wine icoutils wine_gecko wine-mono winetricks playonlinux numix-themes ttf-dejavu ttf-liberation ttf-dejavu
+sudo pacman --noconfirm -S  wine icoutils wine_gecko wine-mono winetricks playonlinux numix-themes ttf-dejavu ttf-liberation ttf-dejavu
 
 
 sudo systemctl enable ufw && sudo systemctl start ufw
@@ -251,21 +251,20 @@ yaourt --noconfirm -S nitrux-icon-theme
 yaourt --noconfirm -S numix-themes
 yaourt --noconfirm -S zuki-themes-git
 yaourt --noconfirm -S evopop-icon-theme
-yaourt --noconfirm -S evopop-gtk-theme
+yaourt --noconfirm -S evopop-icone-theme
 yaourt --noconfirm -S notepadqq
 yaourt --noconfirm -S maia-gtk-theme
 yaourt --noconfirm -S xcursor-maia
 yaourt --noconfirm -S vertex-icons-git
-yaourt --noconfirm -S vertex-theme
-yaourt --noconfirm -S caffeine
+yaourt --noconfirm -S vertex-themes
+yaourt --noconfirm -S caffeine-ng
 yaourt --noconfirm -S kalu
 yaourt --noconfirm -S paper-gtk-theme-git
-yaourt --noconfirm -S vertex-themes 
 yaourt --noconfirm -S evopop-shell-theme-git
 yaourt --noconfirm -S google-chrome
 
-yaourt --nocinfirm -S zramswap
-systemctl enable zramswap && systemctl start zramswap
+yaourt --noconfirm -S zramswap
+sudo systemctl enable zramswap && sudo systemctl start zramswap
 
 
 
@@ -297,10 +296,7 @@ sudo pacman -S nvidia
 #laptop note  #
 #-------------#
 yaourt broadcom-wl #lenove
-sudo pacman -S tlp
-systemctl enable tlp
-systemctl enable tlp-sleep
-systemctl mask systemd-rfkill
+sudo pacman -S tlp && sudo systemctl enable tlp && sudo systemctl enable tlp-sleep && sudo systemctl mask systemd-rfkill
 tlp start
 
 #-------------#
