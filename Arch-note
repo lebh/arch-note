@@ -8,6 +8,13 @@ loadkeys no-latin1			#Will change keyboard layout to norwegian
 
 wifi-menu				#Connects up to wifi
 
+systemctl stop dhcpcd@enp0s25.service
+cp /etc/netctl/examples/ethernet-static /etc/netctl
+netctl start ethernet-static
+
+timedatectl set-ntp true
+timedatectl status
+
 ping www.google.com			#Checking if internett connection is estabilated 
 
 cfdisk /dev/sda				#Configing the partion
@@ -35,6 +42,8 @@ cat /mnt/etc/fstab			#To check that fstab file was correctly generated
 
 arch-chroot /mnt /bin/bash		#Change root
 
+ip-link
+systemctl enable dhcpcd@interface.service
 
 #-----------------------------------------------#
 # Large fontsize for laptops			#
