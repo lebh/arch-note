@@ -239,7 +239,7 @@ sudo systemctl enable NetworkManager && sudo systemctl start NetworkManager
 sudo ntpd -u ntp:ntp
 
 #FS + lib + codec + compressed file + audio
-sudo pacman --noconfirm -S  bc rsync mlocate bash-completion pkgstats  ntfs-3g exfat-utils fuse-exfat autofs a52dec faac faad2 flac jasper lame libdca libdv libmad libmpeg2 libtheora libvorbis libxv wavpack x264 xvidcore gstreamer0.10-plugins gcc patch curl zlib readline libxml2 libxslt bison autoconf automake diffutils make libtool dbus sudo wget openssh tar gzip unzip unrar zip unzip unrar p7zip alsa-utils alsa-plugins pavucontrol
+sudo pacman --noconfirm -S  bc rsync mlocate bash-completion pkgstats  ntfs-3g exfat-utils fuse-exfat autofs a52dec faac faad2 flac jasper lame libdca libdv libmad libmpeg2 libtheora libvorbis libxv wavpack x264 xvidcore gstreamer0.10-plugins gcc patch curl zlib readline libxml2 libxslt bison autoconf automake diffutils make libtool dbus sudo wget openssh tar gzip unzip unrar zip unzip unrar p7zip alsa-utils alsa-plugins pavucontrol lib32-nvidia-libgl lib32-nvidia-utils
 
 #applications
 sudo pacman --noconfirm -S terminator synapse shutter galculator cool-retro-term htop ufw gufw clamav banshee easytag vlc gimp gthumb gedit gedit-plugins mplayer smplayer firefox screenfetch skype teamspeak3 dropbox ufw-extras libreoffice-fresh steam evince flashplugin zathura zathura-pdf-poppler git vim xscreensaver os-prober pinta yaourt
@@ -420,7 +420,7 @@ To Fix CUPS Server errors in Manjaro / Antergos
 
 sudo pacman -Rdd foomatic-db foomatic-db-nonfree
 
-
+sudo pip3 install pyqt5
 
 hp-setup   # then configure it throuh the GUI - best way is to manualy enter the IP due to firewall
 
