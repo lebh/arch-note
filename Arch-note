@@ -429,6 +429,17 @@ xsane     # for scanning ;)
 
 
 
+#----------------
+#chrome for using outlook OWA
+#------------
+
+Create a new User Agent config like this:
+New User-agent name: on Windows
+New User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2227.0 Safari/537.36
+Group: Chrome
+Append? Append
+Indicator Flag: Win
+Click Add
 
 
 #------#
