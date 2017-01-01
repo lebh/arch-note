@@ -18,6 +18,9 @@ timedatectl status
 ping www.google.com			#Checking if internett connection is estabilated 
 
 cfdisk /dev/sda				#Configing the partion
+^sometimes need to make a bios boot about 200m should be good enough
+
+
 
 lsblk /dev/sda 				#When done to check how the partions are 
 
@@ -43,7 +46,7 @@ cat /mnt/etc/fstab			#To check that fstab file was correctly generated
 arch-chroot /mnt /bin/bash		#Change root
 
 ip-link
-systemctl enable dhcpcd@interface.service
+systemctl enable dhcpcd.service 
 
 #-----------------------------------------------#
 # Large fontsize for laptops			#
@@ -105,6 +108,17 @@ exit
 reboot
 
 
+#------------------------------------------------------------------------------#
+# Grub                                                                         #
+#------------------------------------------------------------------------------#
+sudo nano /etc/default/grub                                                    #
+GRUB_GFXMODE=640x480                                                           #
+                                                                               #
+grub-install --target=i386-pc /dev/sdx                                         #
+grub-mkconfig -o /boot/grub/grub.cfg                                           #
+#------------------------------------------------------------------------------#
+
+
 #-------------------------------------------------------------------------------#
 #syslinux notes									#
 #-------------------------------------------------------------------------------#
@@ -144,7 +158,8 @@ sudo nano /etc/pacman.conf
 
 #Also enable multilab
 
-
+pacman-key --init
+pacman-key --populate archlinux
 sudo pacman -Suy
 
 sudo pacman -S yaourt
