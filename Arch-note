@@ -364,6 +364,10 @@ sudo pkgfile -l archlinux-keyring
 fusemount -u "/path/to/dir" #to unmount
 smbnetfs "/path/to/dir"     #to mount; recomended "/home/user/Network Folder"
 
+better:
+sudo mount.cifs //HDA/Disk3 /mnt/hda/Disk3 -o user=(user),password=(pass),sec=ntlm
+in /etc/fstab
+//HDA/Disk1 /mnt/hda/Disk1 cifs username=(user),password=(pass),sec=ntlm 0 0
 
 #------------------#
 #swappiness on SSD #
