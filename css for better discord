@@ -1,0 +1,40 @@
+
+@font-face{
+    font-family: 'Dyslexie';
+    src: url('fonts/Dyslexie Vanlig.ttf')
+    src:
+        local('Dyslexie Vanlig')
+        local('Dyslexie Vanlig')
+        url('fonts/Dyslexie Vanlig.ttf')
+        format('opentype')
+}
+
+
+
+
+.body .message-text .markup {
+    font-size:160%;
+    font-family: Dyslexie;
+    font-weight: 500;
+    line-height: 30px;
+    word-spacing: 5px;
+}
+
+
+ .channel-name {
+    font-size:100%;
+    font-family: Dyslexie;
+    font-weight: 500;
+    line-height: 20px;
+    word-spacing: 5px;
+}
+
+.member-username-inner {
+    font-size:120%;
+    font-family: Dyslexie;
+    font-weight: 500;
+    line-height: 20px;
+    word-spacing: 5px;
+}
+
+
